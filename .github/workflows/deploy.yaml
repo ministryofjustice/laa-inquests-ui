@@ -83,10 +83,41 @@ jobs:
           image: laa-inquests-ui:scan
           args: --file=Dockerfile --policy-path=.snyk
 
-  mocha-unit-tests:
-    name: Mocha Unit Tests
-    uses: ./.github/workflows/mocha.yaml
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment: uat
+    permissions:
+      id-token: write # This is required for requesting the JWT
+      contents: read # This is required for actions/checkout
+    needs:
+      - integration-tests
+      - unit-tests
+      - snyk
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Deploy to uat
+        uses: ./.github/actions/deploy
+        with:
+          app-environment: uat
+          kube-cert: ${{ secrets.KUBE_CERT }}
+          kube-token: ${{ secrets.KUBE_TOKEN }}
+          kube-cluster: ${{ secrets.KUBE_CLUSTER }}
+          kube-namespace: ${{ secrets.KUBE_NAMESPACE }}
+          ecr-repository: ${{ vars.ECR_REPOSITORY }}
+          ecr-registry-url: ${{ secrets.ECR_REGISTRY_URL }}
+          ecr-role-to-assume: ${{ secrets.ECR_ROLE_TO_ASSUME }}
+          ecr-region: ${{ vars.ECR_REGION }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-sha: ${{ github.sha }}
+          github-ref-name: ${{ github.ref_name }}
+          github-head-ref: ${{ github.head_ref }}
+          image-tag: ${{ github.sha }}
 
-  playwright:
+  unit-tests:
+    name: Mocha Unit Tests
+    uses: ./.github/workflows/tests/unit.yaml
+
+  e2e-tests:
     name: Playwright Tests
-    uses: ./.github/workflows/playwright.yaml
+    uses: ./.github/workflows/tests/playwright.yaml
