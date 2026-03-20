@@ -4,20 +4,17 @@ FROM node:25.8.1-alpine
 # Set the working directory inside the container
 WORKDIR /app
 
-# Enable Corepack and prepare Yarn version
-RUN corepack enable && corepack prepare yarn@4.10.3 --activate
-
 # Copy package.json and yarn.lock to the working directory
-COPY package*.json yarn.lock .yarnrc.yml ./
+COPY . .
 
 # Force install of corepack (necessary with node >=v25.0.0)
 RUN npm install -g corepack --force
 
-# Enable Corepack to use the correct Yarn version
-RUN corepack enable
-
 # Install dependencies
 RUN yarn install --immutable
+
+# Enable Corepack and prepare Yarn version
+RUN corepack enable
 
 # Create a non-root user
 RUN addgroup -g 1001 -S appuser && \
