@@ -4,7 +4,7 @@ FROM node:25.8.1-alpine
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy package.json and yarn.lock to the working directory
+# Copy the application code to the working directory
 COPY . .
 
 # Force install of corepack (necessary with node >=v25.0.0)
