@@ -47,6 +47,15 @@ runs:
         kube-cluster: ${{ inputs.kube-cluster }}
         kube-namespace: ${{ inputs.kube-namespace }}
 
+    - name: Set up AWS credentials for ECR and Kubernetes
+      uses: aws-actions/configure-aws-credentials@v6.0.0
+      with:
+        role-to-assume: ${{ inputs.ecr-role-to-assume }}
+        aws-region: ${{ inputs.ecr-region }}
+
+    - uses: aws-actions/amazon-ecr-login@062b18b96a7aff071d4dc91bc00c4c1a7945b076
+      id: login-ecr
+
     - name: Deploy infrastructure to UAT
       shell: bash
       run: |
@@ -55,6 +64,14 @@ runs:
           echo "DEPLOYING"
           kubectl apply --record=false -f ./deploy/infrastructure/grafana/
         fi
+    - run: |
+        docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+        docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+      shell: bash
+      env:
+        REGISTRY: ${{ inputs.ecr-registry-url }}
+        REPOSITORY: ${{ inputs.ecr-repository }}
+        IMAGE_TAG: ${{ inputs.image-tag }}
 
     - name: Set environment variables
       shell: bash
