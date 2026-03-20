@@ -45,17 +45,17 @@ securityContext:
 
 service:
   type: ClusterIP
-  port: 80
+  port: 3000
 
 ingress:
   enabled: true
   hosts:
-    - host: your-staging-namespace.cloud-platform.service.justice.gov.uk
+    - host: laa-inquests-ui-staging.apps.live.cloud-platform.service.justice.gov.uk
       paths:
         - path: /
           pathType: Prefix
   annotations:
-    external-dns.alpha.kubernetes.io/set-identifier: "ingress-name-laa-inquests-ui-laa-inquests-ui-staging-green"
+    external-dns.alpha.kubernetes.io/set-identifier: "laa-inquests-ui-laa-inquests-ui-staging-green"
     external-dns.alpha.kubernetes.io/aws-weight: "100"
 
 resources:

@@ -43,12 +43,12 @@ securityContext:
 
 service:
   type: ClusterIP
-  port: 80
+  port: 3000
 
 ingress:
   enabled: true
   hosts:
-    - host: laa-inquests-ui-uat.apps.cloud-platform.service.justice.gov.uk
+    - host: laa-inquests-ui-uat.apps.live.cloud-platform.service.justice.gov.uk
       paths:
         - path: /
           pathType: Prefix
