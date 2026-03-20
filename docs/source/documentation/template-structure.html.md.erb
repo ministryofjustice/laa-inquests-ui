@@ -7,7 +7,7 @@ review_in: 6 weeks
 # Template structure
 
 ## Routing
-This template uses the built-in Express JS routing. 
+This template uses the built-in Express JS routing.
 
 A route is a section of Express code that associates an HTTP verb (`GET`, `POST`, `PUT`, `DELETE`, etc.), with a URL path/pattern, and a function that is called to handle that pattern.
 
@@ -40,7 +40,7 @@ The template organises API connection functionality across several key directori
 // Import the base service pattern
 import { BaseApiService } from '#src/services/baseApiService.js';
 
-// Import middleware utilities  
+// Import middleware utilities
 import { createApiMiddleware } from '#utils/axiosSetup.js';
 import type { ApiMiddlewareConfig } from '#utils/axiosSetup.js';
 
@@ -52,7 +52,7 @@ class MyApiService extends BaseApiService {
 
 This architecture separates concerns between:
 - **Middleware layer** (`src/middleware/`) - Request/response handling, authentication, logging
-- **Service layer** (`src/services/`) - Domain-specific API logic and business operations  
+- **Service layer** (`src/services/`) - Domain-specific API logic and business operations
 - **Utilities** (`utils/`) - Exports and configuration interfaces for easy imports
 
 ## Import paths and path aliases
@@ -107,9 +107,9 @@ This command builds the template initially and then sets up all watch processes 
 ## Deployment files
 The template has an outline of how you might want to deploy your application to a hosted cloud service. The initial configuration can be enhanced to do the following;
 
-- Enhance the `.github/workflows/deploy.yml` file, to deploy a docker image to a namespace in the hosted cloud service using Helm values found in the template
-- Add a `.github/actions/deploy/action.yml` file to Deploy docker image to namespace
-- Add a `.github/actions/build_and_push/action.yml` file to Build Image and Push to a Container Registry (with caching)
+- Enhance the `.github/workflows/deploy.yaml` file, to deploy a docker image to a namespace in the hosted cloud service using Helm values found in the template
+- Add a `.github/actions/deploy/action.yaml` file to Deploy docker image to namespace
+- Add a `.github/actions/build_and_push/action.yaml` file to Build Image and Push to a Container Registry (with caching)
 
 The file structure would look like this;
 
@@ -117,11 +117,11 @@ The file structure would look like this;
 .github/
   actions/
     build_and_push/
-      action.yml
+      action.yaml
     deploy/
-      action.yml
+      action.yaml
   workflows/
-    deploy.yml
+    deploy.yaml
 deploy/
   your-repo-name/
     values/ # Helm chart values
@@ -129,9 +129,9 @@ src/
   deploy.sh/
 ```
 
-Example of how you might want to implement this can be found in the [MCC repo](https://github.com/ministryofjustice/laa-manage-your-civil-cases). 
+Example of how you might want to implement this can be found in the [MCC repo](https://github.com/ministryofjustice/laa-manage-your-civil-cases).
 
 
 ## GitHub Actions
 
-- These have been disabled in this GitHub template repo. Make sure you enable them when setting up your project. 
+- These have been disabled in this GitHub template repo. Make sure you enable them when setting up your project.

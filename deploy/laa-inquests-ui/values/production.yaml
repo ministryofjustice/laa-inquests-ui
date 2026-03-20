@@ -20,7 +20,7 @@ serviceAccount:
   create: false
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
-  name: "your-github-action-service-account"
+  name: "inquests-serviceaccount"
 
 podAnnotations: {}
 podLabels: {}
@@ -61,12 +61,12 @@ env:
 ingress:
   enabled: true
   hosts:
-    - host: your-production-namespace.cloud-platform.service.justice.gov.uk
+    - host: laa-inquests-ui-prod.cloud-platform.service.justice.gov.uk
       paths:
         - path: /
           pathType: Prefix
   annotations:
-    external-dns.alpha.kubernetes.io/set-identifier: "ingress-name-your-repo-name-your-repo-name-production-green"
+    external-dns.alpha.kubernetes.io/set-identifier: "laa-inquests-ui-laa-inquests-ui-production-green"
     external-dns.alpha.kubernetes.io/aws-weight: "100"
 
 service:

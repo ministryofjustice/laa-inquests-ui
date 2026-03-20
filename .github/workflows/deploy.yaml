@@ -56,8 +56,8 @@ jobs:
 
   mocha-unit-tests:
     name: Mocha Unit Tests
-    uses: ./.github/workflows/mocha.yml
+    uses: ./.github/workflows/mocha.yaml
 
   playwright:
     name: Playwright Tests
-    uses: ./.github/workflows/playwright.yml
+    uses: ./.github/workflows/playwright.yaml
