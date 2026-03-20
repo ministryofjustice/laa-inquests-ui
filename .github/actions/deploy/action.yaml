@@ -14,7 +14,8 @@ inputs:
     description: "Kubernetes cluster namespace"
     required: true
   app-environment:
-    description: "Environment to which the app is being deployed [staging, production, etc]"
+    description:
+      "Environment to which the app is being deployed [staging, production, etc]"
     required: true
   ecr-repository:
     description: "ECR repository"
@@ -45,6 +46,15 @@ runs:
         kube-token: ${{ inputs.kube-token }}
         kube-cluster: ${{ inputs.kube-cluster }}
         kube-namespace: ${{ inputs.kube-namespace }}
+
+    - name: Deploy infrastructure to UAT
+      shell: bash
+      run: |
+        if [ ${{ inputs.app-environment }} == 'uat' ]
+        then
+          echo "DEPLOYING"
+          kubectl apply --record=false -f ./deploy/infrastructure/grafana/
+        fi
 
     - name: Set environment variables
       shell: bash
