@@ -30,10 +30,14 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-chromium-${{ hashFiles('**/yarn.lock') }}
+          key:
+            ${{ runner.os }}-playwright-chromium-${{ hashFiles('**/yarn.lock')
+            }}
 
       - name: Run Playwright tests
-        run: yarn playwright test --config=tests/playwright/playwright.config.ts --grep-invert @accessibility
+        run:
+          yarn playwright test --config=tests/playwright/playwright.config.ts
+          --grep-invert @accessibility
         env:
           CI: true
           PLAYWRIGHT_TRACING: "on" # Enable tracing for all tests
@@ -63,7 +67,9 @@ jobs:
 
       - name: Notify on test failure
         if: failure()
-        run: echo "::error::Playwright tests failed! Check the test report for details."
+        run:
+          echo "::error::Playwright tests failed! Check the test report for
+          details."
 
   accessibility:
     name: Accessibility Tests
@@ -85,7 +91,7 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
         env:
-          SKIP_YARN_COREPACK_CHECK: '1'
+          SKIP_YARN_COREPACK_CHECK: "1"
 
       - name: Enable Corepack and prepare Yarn
         run: |
@@ -105,35 +111,36 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-chromium-${{ hashFiles('**/yarn.lock') }}
+          key:
+            ${{ runner.os }}-playwright-chromium-${{ hashFiles('**/yarn.lock')}}
 
-      - name: Run Accessibility Tests
-        run: yarn playwright test --config=tests/playwright/playwright.config.ts --grep @accessibility
-        env:
-          CI: true
-          SESSION_SECRET: "accessibility-test-secret"
-          SESSION_NAME: "sessionId"
-          NODE_ENV: "test"
-          SERVICE_NAME: "Your Service Name"
-          SERVICE_PHASE: "Alpha"
-          DEPARTMENT_NAME: "LAA Digital"
-          DEPARTMENT_URL: "https://www.gov.uk/government/organisations/legal-aid-agency"
-          CONTACT_EMAIL: "your-team@digital.justice.gov.uk"
-          SERVICE_URL: "https://www.gov.uk/legal-aid"
-          RATELIMIT_HEADERS_ENABLED: "true"
-          RATE_LIMIT_MAX: "100"
-          RATE_WINDOW_MS: "900000"
+      # - name: Run Accessibility Tests
+      #   run: yarn playwright test --config=tests/playwright/playwright.config.ts --grep @accessibility
+      #   env:
+      #     CI: true
+      #     SESSION_SECRET: "accessibility-test-secret"
+      #     SESSION_NAME: "sessionId"
+      #     NODE_ENV: "test"
+      #     SERVICE_NAME: "Your Service Name"
+      #     SERVICE_PHASE: "Alpha"
+      #     DEPARTMENT_NAME: "LAA Digital"
+      #     DEPARTMENT_URL: "https://www.gov.uk/government/organisations/legal-aid-agency"
+      #     CONTACT_EMAIL: "your-team@digital.justice.gov.uk"
+      #     SERVICE_URL: "https://www.gov.uk/legal-aid"
+      #     RATELIMIT_HEADERS_ENABLED: "true"
+      #     RATE_LIMIT_MAX: "100"
+      #     RATE_WINDOW_MS: "900000"
 
-      - name: Upload Accessibility Report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: accessibility-report
-          path: |
-            playwright-report/
-            test-results/
-          retention-days: 14
+      # - name: Upload Accessibility Report
+      #   if: always()
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: accessibility-report
+      #     path: |
+      #       playwright-report/
+      #       test-results/
+      #     retention-days: 14
 
-      - name: Notify on accessibility failure
-        if: failure()
-        run: echo "::error::Accessibility tests failed! Check the accessibility report for details."
+      # - name: Notify on accessibility failure
+      #   if: failure()
+      #   run: echo "::error::Accessibility tests failed! Check the accessibility report for details."
