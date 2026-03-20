@@ -13,7 +13,7 @@ deploy_branch() {
   echo "Deploying commit: $GITHUB_SHA under release name: '$BRANCH_RELEASE_NAME'..."
 
   helm upgrade "$BRANCH_RELEASE_NAME" ./deploy/infrastructure/helm/. \
-                --install --wait \
+                --install --wait --timeout 10m \
                 --namespace="${K8S_NAMESPACE}" \
                 --values ./deploy/infrastructure/helm/values/"$ENVIRONMENT".yaml \
                 --set image.repository="$REGISTRY/$REPOSITORY" \
@@ -39,7 +39,7 @@ deploy_branch() {
 deploy_main() {
   RELEASE_HOST="laa-inquests-ui-$ENVIRONMENT.cloud-platform.service.justice.gov.uk"
   helm upgrade laa-inquests-ui ./deploy/infrastructure/helm/. \
-                          --install --wait \
+                          --install --wait --timeout 10m \
                           --namespace="${K8S_NAMESPACE}" \
                           --values ./deploy/infrastructure/helm/values/"$ENVIRONMENT".yaml \
                           --set image.repository="$REGISTRY/$REPOSITORY" \
