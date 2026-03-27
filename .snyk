@@ -29,3 +29,9 @@ ignore:
   "SNYK-ALPINE323-ZLIB-15435528":
     - "*":
         reason: "No direct patch or upgrade available."
+  "SNYK-JS-PATHTOREGEXP-15789765":
+    - "*":
+        reason: "Cannot patch directly, bundled with latest version of express."
+  "SNYK-JS-PATHTOREGEXP-15789763":
+    - "*":
+        reason: "Cannot patch directly, bundled with latest version of express."
