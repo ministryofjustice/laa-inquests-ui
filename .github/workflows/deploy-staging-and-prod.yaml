@@ -2,8 +2,6 @@ name: Deploy Main to Staging & Prod
 
 on:
   push:
-    branches:
-      - IDDS-20-configure-variables-for-staging-and-prod
     tags:
       - "*.*.*"
 jobs:
