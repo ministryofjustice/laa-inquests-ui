@@ -17,6 +17,7 @@ jobs:
         with:
           app-environment: staging
           ecr-repository: ${{ vars.ECR_REPOSITORY }}
+          ecr-region: ${{ vars.ECR_REGION }}
           ecr-registry_url: ${{ secrets.ECR_REGISTRY_URL }}
           ecr-role-to-assume: ${{ secrets.ECR_ROLE_TO_ASSUME }}
           kube-cert: ${{ secrets.KUBE_CERT }}
@@ -42,6 +43,7 @@ jobs:
         with:
           app-environment: production
           ecr-repository: ${{ vars.ECR_REPOSITORY }}
+          ecr-region: ${{ vars.ECR_REGION }}
           ecr-registry_url: ${{ secrets.ECR_REGISTRY_URL }}
           ecr-role-to-assume: ${{ secrets.ECR_ROLE_TO_ASSUME }}
           kube-cert: ${{ secrets.KUBE_CERT }}
