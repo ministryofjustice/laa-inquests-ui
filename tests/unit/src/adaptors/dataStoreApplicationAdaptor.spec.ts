@@ -1,14 +1,9 @@
-/**
- * Application API Adaptor Tests
- */
-
 import sinon from "sinon";
 import axios from "axios";
-
-export const axiosGetStub = sinon.stub(axios, "get");
-
-import { assert, expect, use } from "chai";
+import { assert } from "chai";
 import { ApplicationDataStoreAdaptor } from '#src/adaptors/dataStoreApplicationAdaptor.js';
+
+const axiosGetStub = sinon.stub(axios, "get");
 
 afterEach(() => {
   axiosGetStub.reset();
@@ -16,14 +11,15 @@ afterEach(() => {
 
 describe('Test Application API Adaptor', () => {
   it('Test get Applications calls axios', async () => {
-    const adaptor = new ApplicationDataStoreAdaptor();
+    const baseUrl = "https://www.gov.uk";
+    const fakeAxios = { get: axiosGetStub } as any;
+    const adaptor = new ApplicationDataStoreAdaptor(fakeAxios, baseUrl);
     axiosGetStub.resolves({
       data: {},
     });
     await adaptor.getApplication("123");
-    sinon.assert.calledWith(axiosGetStub, "");
-    console.log(axiosGetStub.getCalls);
     assert(axiosGetStub.calledOnce);
+    sinon.assert.calledWith(axiosGetStub, baseUrl);
   });
 });
 
