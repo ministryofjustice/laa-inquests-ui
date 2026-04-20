@@ -18,8 +18,8 @@ import {
   storeSessionData,
   getSessionData,
   clearSessionData,
-  storeOriginalFormData
-} from '#src/infrastructure/express/session/sessionHelpers.js';
+  storeOriginalFormData,
+} from "#src/infrastructure/express/session/sessionHelpers.js";
 
 // Mock request factory with session
 function createMockRequest(sessionData: Record<string, any> = {}): Request {
@@ -28,14 +28,13 @@ function createMockRequest(sessionData: Record<string, any> = {}): Request {
   } as Request;
 }
 
-describe('Session Helpers', () => {
-
-  describe('storeSessionData()', () => {
-    it('stores data under specified namespace', () => {
+describe("Session Helpers", () => {
+  describe("storeSessionData()", () => {
+    it("stores data under specified namespace", () => {
       const req = createMockRequest();
-      const testData = { name: 'John', age: '30' };
+      const testData = { name: "John", age: "30" };
 
-      storeSessionData(req, 'testNamespace', testData);
+      storeSessionData(req, "testNamespace", testData);
 
       expect(req.session.testNamespace).to.deep.equal(testData);
     });
@@ -46,25 +45,25 @@ describe('Session Helpers', () => {
       const sessionData = { testNamespace: { name: "John", age: "30" } };
       const req = createMockRequest(sessionData);
 
-      const result = getSessionData(req, 'testNamespace');
+      const result = getSessionData(req, "testNamespace");
 
-      expect(result).to.deep.equal({ name: 'John', age: '30' });
+      expect(result).to.deep.equal({ name: "John", age: "30" });
     });
 
     it("returns null when namespace does not exist", () => {
       const req = createMockRequest();
 
-      const result = getSessionData(req, 'nonexistent');
+      const result = getSessionData(req, "nonexistent");
 
       expect(result).to.be.null;
     });
   });
 
-  describe('clearSessionData()', () => {
-    it('clears data from specified namespace', () => {
-      const req = createMockRequest({ testNamespace: { data: 'value' } });
+  describe("clearSessionData()", () => {
+    it("clears data from specified namespace", () => {
+      const req = createMockRequest({ testNamespace: { data: "value" } });
 
-      clearSessionData(req, 'testNamespace');
+      clearSessionData(req, "testNamespace");
 
       expect(req.session.testNamespace).to.be.undefined;
     });
@@ -73,12 +72,17 @@ describe('Session Helpers', () => {
   describe("storeOriginalFormData()", () => {
     it("converts and stores form data as strings", () => {
       const req = createMockRequest({});
-      const formData = { name: 'John', age: 30, active: true, empty: null };
+      const formData = { name: "John", age: 30, active: true, empty: null };
 
-      storeOriginalFormData(req, 'testOriginal', formData);
-      const stored = getSessionData(req, 'testOriginal');
+      storeOriginalFormData(req, "testOriginal", formData);
+      const stored = getSessionData(req, "testOriginal");
 
-      expect(stored).to.deep.equal({ name: 'John', age: '30', active: 'true', empty: '' });
+      expect(stored).to.deep.equal({
+        name: "John",
+        age: "30",
+        active: "true",
+        empty: "",
+      });
     });
   });
 });
