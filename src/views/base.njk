@@ -1,8 +1,6 @@
 {% extends "govuk/template.njk" %}
 {% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
 
-{% set govukRebrand = true %}
-
 {% block pageTitle %}{{config.SERVICE_NAME}} – GOV.UK{% endblock %}
 
 {% block head %}
@@ -18,16 +16,15 @@
   {# cookie policy #}
 {% endblock %}
 
-{% block header %}
+{% block govukHeader %}
   {{ govukHeader({
     homepageUrl: "#",
-    serviceName: config.SERVICE_NAME,
+    serviceName: "Inquests",
     serviceUrl: "#",
-    rebrand: govukRebrand
   }) }}
 {% endblock %}
 
-{% block beforeContent %}
+{% block headerEnd %}
   {{ govukPhaseBanner({
     tag: {
       text: config.SERVICE_PHASE
@@ -40,9 +37,8 @@
   <h1 class="govuk-heading-xl">{{ t('pages.home.defaultHeading') }}</h1>
 {% endblock %}
 
-{% block footer %}
+{% block govukFooter %}
   {{ govukFooter({
-    rebrand: govukRebrand,
     meta: {
       items: [
         {
