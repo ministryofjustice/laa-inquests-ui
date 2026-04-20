@@ -48,7 +48,7 @@ export default defineConfig({
       PORT: "3000",
       SESSION_SECRET: "test-secret-key-for-playwright-tests",
       SESSION_NAME: "test-session",
-      SERVICE_NAME: "Test Express Template",
+      SERVICE_NAME: "Inquests",
     },
   },
 });
