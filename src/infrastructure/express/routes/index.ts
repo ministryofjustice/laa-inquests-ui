@@ -2,8 +2,8 @@ import express from "express";
 import type { Request, Response } from "express";
 
 import createApplicationRouter from "#src/infrastructure/express/routes/application.router.js";
-import { ApplicationDisplayAdaptor } from "#src/adaptors/application.adaptor.js";
-import { ApplicationDataStoreAdaptor } from "#src/adaptors/dataStoreApplication.adaptor.js";
+import { ApplicationDisplayAdaptor } from "#src/adaptors/application.js";
+import { ApplicationDataStoreAdaptor } from "#src/adaptors/dataStoreApplication.js";
 import axios from "axios";
 
 // Create a new router
