@@ -1,2 +1,2 @@
-@import "govuk-frontend/dist/govuk/index";
-@import "@ministryofjustice/frontend/moj/all";
+@use "govuk-frontend/dist/govuk/index" as *;
+@forward "@ministryofjustice/frontend/moj/all";

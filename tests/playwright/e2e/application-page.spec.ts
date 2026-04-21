@@ -9,5 +9,5 @@ test("homepage should have the correct title", async ({ page }) => {
   );
 
   // Check for the title of the application
-  await expect(page).toHaveTitle(/Test Express Template – GOV.UK/);
+  await expect(page).toHaveTitle(/Inquests – GOV.UK/);
 });
