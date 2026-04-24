@@ -57,6 +57,15 @@ export default [
       ],
       "@typescript-eslint/no-var-requires": "error",
       "@typescript-eslint/no-explicit-any": "warn",
+      "@typescript-eslint/class-methods-use-this": "off",
+      "@typescript-eslint/strict-boolean-expressions": [
+        "error",
+        {
+          allowNullableString: true,
+        },
+      ],
+      "@typescript-eslint/no-unsafe-type-assertion": "off",
+      "@typescript-eslint/max-params": "off",
     },
   },
   // Add a separate config for declaration files
