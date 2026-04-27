@@ -5,7 +5,7 @@ import {
   isCustomError,
   isAxiosErrResponse,
 } from "#src/infrastructure/express/middleware/errors/errors.types.js";
-//import { logger } from "#src/infrastructure/logger/logger.js";
+import { logger } from "#src/infrastructure/express/middleware/logger/logger.js";
 
 const handleRouteNotFound = (_: Request, res: Response): void => {
   res.status(404).render("main/error", {
@@ -50,19 +50,18 @@ const handleServerErrors = (
   req: Request,
   res: Response,
 ): void => {
-  console.error("Server Error Middleware", "Internal Server Error", err, req);
-  //logger.logError("Server Error Middleware", "Internal Server Error", err, req);
+  logger.logError("Server Error Middleware", "Internal Server Error", err, req);
   res.render("main/error", { status: 500, message: "Internal Server Error" });
 };
 
 const handleZodErrors = (err: unknown, req: Request, res: Response): void => {
   if (err instanceof z.ZodError) {
-    // logger.logError(
-    //   "Zod Error Middleware",
-    //   "Invalid response from API",
-    //   err,
-    //   req,
-    // );
+    logger.logError(
+      "Zod Error Middleware",
+      "Invalid response from API",
+      err,
+      req,
+    );
     res.render("main/error", { status: 500, message: "Internal Server Error" });
   }
 };
