@@ -38,6 +38,7 @@ export default [
       quotes: "off", // Prettier is handling this
       semi: "off", // Prettier is handling this
       "no-console": "off", // Stops complaining about putting messages in the console
+      "no-negated-condition": "off",
       "unused-disable-directive": "off", // stops complaining about single line disable next line
       "prefer-named-capture-group": "off",
       "no-param-reassign": ["error", { props: false }], // Allow modifying properties of function parameters (common in Express middleware and reducers)
@@ -48,6 +49,7 @@ export default [
         "error",
         { allowStaticOnly: true },
       ],
+      "@typescript-eslint/no-magic-numbers": "off",
       "@typescript-eslint/no-namespace": "off", // Allow namespaces for declaration files
       "@typescript-eslint/triple-slash-reference": [
         "error",
@@ -55,6 +57,15 @@ export default [
       ],
       "@typescript-eslint/no-var-requires": "error",
       "@typescript-eslint/no-explicit-any": "warn",
+      "@typescript-eslint/class-methods-use-this": "off",
+      "@typescript-eslint/strict-boolean-expressions": [
+        "error",
+        {
+          allowNullableString: true,
+        },
+      ],
+      "@typescript-eslint/no-unsafe-type-assertion": "off",
+      "@typescript-eslint/max-params": "off",
     },
   },
   // Add a separate config for declaration files

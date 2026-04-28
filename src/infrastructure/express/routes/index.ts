@@ -5,6 +5,7 @@ import createApplicationRouter from "#src/infrastructure/express/routes/applicat
 import { ApplicationDisplayAdaptor } from "#src/adaptors/application.js";
 import { ApplicationDataStoreAdaptor } from "#src/adaptors/dataStoreApplication.js";
 import axios from "axios";
+import { logger } from "../middleware/logger/logger.js";
 
 // Create a new router
 const router = express.Router();
@@ -19,6 +20,14 @@ router.get("/", (req: Request, res: Response): void => {
 router.get(
   "/application/:applicationId",
   (req: Request, res: Response): void => {
+    const {
+      params: { applicationId },
+    } = req;
+    logger.logInfo(
+      "GET Application by ID",
+      `Application with ID: ${applicationId as string} has been accessed.`,
+      req,
+    );
     res.render("application/index");
   },
 );
